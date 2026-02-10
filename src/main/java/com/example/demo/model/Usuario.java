@@ -10,6 +10,12 @@ public class Usuario {
     private String nombre;
     private String email;
 
+    public Usuario(String nombre, String email){
+        this.nombre=nombre;
+        this.email=email;
+    }
+    public Usuario(){};
+
     public Long getId(){
         return id;
     }
@@ -28,4 +34,8 @@ public class Usuario {
     public void setEmail(String email){
         this.email = email;
     }
+
+    public String toString(){
+        return "Usuario { id: " + id + "/ nombre: " + nombre + "/ email: " + email;}
+
 }
