@@ -15,9 +15,11 @@ public class UsuarioService {
     public List<Usuario> listarUsuarios(){
         return usuarioRepository.findAll();
     }
+
     public Usuario guardarUsuario(Usuario usuario){
         return usuarioRepository.save(usuario);
     }
+
     public Optional<Usuario> buscarPorId(Long id){
         return usuarioRepository.findById(id);
     }

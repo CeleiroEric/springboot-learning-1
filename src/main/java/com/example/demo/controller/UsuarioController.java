@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.model.Usuario;
 import com.example.demo.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,12 +26,15 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Usuario> obtenerPorId(@PathVariable Long id){
-        return usuarioService.buscarPorId(id);
+    public ResponseEntity<Usuario> obtenerPorId(@PathVariable Long id){
+        return usuarioService.buscarPorId(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
-    public void eliminarPorId(@PathVariable Long id){
+    public ResponseEntity<Void> eliminarPorId(@PathVariable Long id){
         usuarioService.eliminarPorId(id);
+        return ResponseEntity.noContent().build();
     }
 }
