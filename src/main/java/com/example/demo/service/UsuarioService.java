@@ -26,4 +26,12 @@ public class UsuarioService {
     public void eliminarPorId(Long id){
         usuarioRepository.deleteById(id);
     }
+
+    public Optional<Usuario> actualizarUsuario(Long id, Usuario datos){
+        return usuarioRepository.findById(id)
+                .map(usuario -> { usuario.setNombre(datos.getNombre());
+                usuario.setEmail(datos.getEmail());
+                return usuarioRepository.save(usuario);
+                });
+    }
 }

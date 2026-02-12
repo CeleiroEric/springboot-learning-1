@@ -31,10 +31,14 @@ public class UsuarioController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarPorId(@PathVariable Long id){
         usuarioService.eliminarPorId(id);
         return ResponseEntity.noContent().build();
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<Usuario> actualizar(@PathVariable Long id,@RequestBody Usuario usuario){
+        return usuarioService.actualizarUsuario(id,usuario).map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 }
