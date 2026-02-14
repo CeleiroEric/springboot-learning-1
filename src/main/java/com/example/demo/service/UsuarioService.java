@@ -1,4 +1,5 @@
 package com.example.demo.service;
+import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.Usuario;
 import com.example.demo.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,11 +28,11 @@ public class UsuarioService {
         usuarioRepository.deleteById(id);
     }
 
-    public Optional<Usuario> actualizarUsuario(Long id, Usuario datos){
+    public Usuario actualizarUsuario(Long id, Usuario datos){
         return usuarioRepository.findById(id)
                 .map(usuario -> { usuario.setNombre(datos.getNombre());
                 usuario.setEmail(datos.getEmail());
                 return usuarioRepository.save(usuario);
-                });
+                }).orElseThrow(() -> new ResourceNotFoundException("Usuario con id " + id + " no encontrado "));
     }
 }
